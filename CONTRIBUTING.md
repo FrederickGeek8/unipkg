@@ -29,6 +29,6 @@ please make sure you have done the following things:
 1. Fork the repo and create your branch from `master`
 2. If you've added code that should be tested, add tests
 3. If you've changed APIs, update the available documentation.
-4. Ensure that all tests run and code coverage has not decreased signifigantly
+4. Ensure that all tests run and code coverage has not decreased significantly
 from before.
 5. Make sure your code lints.

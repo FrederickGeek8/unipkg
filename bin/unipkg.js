@@ -9,7 +9,7 @@ if (process.argv.length < 3 || process.argv.find(arg => arg === "--help")) {
     <directory> is the well structured package folder which should
     contain both the DEBIAN folder and the data of the package.
     [<deb>] is the optional output filename and path of the resulting Debian 
-    format archive. It defaults outputing a deb file in the current working
+    format archive. It defaults to outputting a deb file in the current working
     directory using the standard Debian name scheme.
     `
   );

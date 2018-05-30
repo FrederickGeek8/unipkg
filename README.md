@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/FrederickGeek8/unipkg.svg?token=hQpyUwvb4S1UztNVqWsQ&branch=master)](https://travis-ci.com/FrederickGeek8/unipkg)
 
 Multi-platform implementation of dpkg (in Javascript) with a programming and
-command-line interface. Currently only the functional equvalence of `dpkg-deb -b`
+command-line interface. Currently only the functional equivalence of `dpkg-deb -b`
 has been developed.
 
 ## Requirements
