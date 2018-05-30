@@ -1,4 +1,6 @@
 # unipkg
+[![Gitter chat](https://badges.gitter.im/unipkg/gitter.svg)](https://gitter.im/unipkg/Lobby)
+
 Multi-platform implementation of dpkg (in Javascript) with a programming and
 command-line interface. Currently only the functional equvalence of `dpkg-deb -b`
 has been developed.
@@ -23,6 +25,36 @@ or, of course, locally by running
 npm install unipkg
 ```
 
+## Usage
+`unipkg` has both a interface for Node.js as well as a command-line interface.
+The command line interface can be used as follows:
+```bash
+unipkg <directory> [<deb>]
+```
+Where `<directory>` is the path to the root of the Debian package you want to
+build, and `[<deb>]` is the optional output file path parameter. By default
+`unipkg` will generate the output deb file in your current working directory
+using the standard Debian naming scheme.
+
+The following is boilerplate code for the Node.js interface. `build` can take two
+parameters, where the first parameter is the input directory, and the second
+(optional) parameter is the output deb path. It will return a Promise.
+```node
+const dpkg = require("unipkg");
+const pkg = "path/to/project/root";
+
+dpkg.build(pkg).then(
+  path => {
+    console.log(`The Debian package ${path} has been successfully written.`);
+    process.exit(0);
+  },
+  err => {
+    console.error(`Error: ${err}`);
+    process.exit(1);
+  }
+);
+```
+
 ## Contributing
 Feel free to submit issues or pull requests to the repository. Before contributing,
 please read our [Contributing Guide](CONTRIBUTING.md).
@@ -32,7 +64,6 @@ please read our [Contributing Guide](CONTRIBUTING.md).
 * [Debian Maintainer's Guide](https://www.debian.org/doc/manuals/maint-guide/index.en.html)
 * [Environment Variable Definition](http://pubs.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html)
 * [`ar` File Format](https://en.wikipedia.org/wiki/Ar_%28Unix%29#File_format_details)
-
 
 ## Related Software
 Despite my best efforts to initially find alternative software before beginning

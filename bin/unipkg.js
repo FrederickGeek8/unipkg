@@ -8,8 +8,9 @@ if (process.argv.length < 3 || process.argv.find(arg => arg === "--help")) {
 
     <directory> is the well structured package folder which should
     contain both the DEBIAN folder and the data of the package.
-    <deb> is the output filename and path of the resulting Debian 
-    format archive.
+    [<deb>] is the optional output filename and path of the resulting Debian 
+    format archive. It defaults outputing a deb file in the current working
+    directory using the standard Debian name scheme.
     `
   );
 
@@ -17,8 +18,6 @@ if (process.argv.length < 3 || process.argv.find(arg => arg === "--help")) {
 }
 
 const dpkg = require("../src/index.js");
-
-console.log(process.argv);
 
 dpkg.build(process.argv[2], process.argv[3]).then(
   path => {
