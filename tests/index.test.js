@@ -1,7 +1,7 @@
 const dpkg = require("../src/index.js");
 const fs = require("fs-extra");
 const tar = require("tar");
-const epsilon = 100;
+const epsilon = 500;
 
 process.chdir(__dirname);
 test("generates standard deb file", async () => {
@@ -11,6 +11,14 @@ test("generates standard deb file", async () => {
     .then(file => {
       const stats = fs.statSync("rolldice_1.16-1+b2_amd64.deb");
       expect(file).toBe("rolldice_1.16-1+b2_amd64.deb");
+
+      /*
+        This is a really awful test. I (or someone) needs to write an
+        ar implementation for Node.js that I can use to test the contents.
+        Since the contents are sort of dynamically streamed in, the MD5 can
+        change. We hope that the file size is within some epsilon of the
+        expected size. 
+      */
       expect(Math.abs(stats.size - 13198)).toBeLessThan(epsilon);
     })
     .then(() => fs.unlink("rolldice_1.16-1+b2_amd64.deb"));
