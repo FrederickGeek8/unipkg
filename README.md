@@ -1,5 +1,6 @@
 # unipkg
 [![Gitter chat](https://badges.gitter.im/unipkg/gitter.svg)](https://gitter.im/unipkg/Lobby)
+[![Build Status](https://travis-ci.com/FrederickGeek8/unipkg.svg?token=hQpyUwvb4S1UztNVqWsQ&branch=master)](https://travis-ci.com/FrederickGeek8/unipkg)
 
 Multi-platform implementation of dpkg (in Javascript) with a programming and
 command-line interface. Currently only the functional equvalence of `dpkg-deb -b`

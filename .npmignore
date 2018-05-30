@@ -104,5 +104,6 @@ typings/
 tests
 yarn.lock
 .eslintrc
+.travis.yml
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
