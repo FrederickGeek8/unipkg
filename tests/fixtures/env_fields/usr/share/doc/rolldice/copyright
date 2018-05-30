@@ -1,0 +1,29 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: rolldice
+Upstream-Contact: Stevie Strickland <sstrickl@cs.brown.edu>
+Source: https://github.com/sstrickl/rolldice
+
+Files: *
+Copyright: 1999-2012 Stevie Strickland
+License: GPL-2
+
+Files: debian/*
+Copyright: 1999 Stevie Strickland
+           2006 Steinar H. Gunderson
+           2006 Michael Ablassmeier
+           2006-2010 Luis Uribe
+           2015 Thomas Ross
+License: GPL-2
+
+License: GPL-2
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ . 
+ On Debian systems, the complete text of the GNU General Public License
+ can be found in `/usr/share/common-licenses/GPL-2'.

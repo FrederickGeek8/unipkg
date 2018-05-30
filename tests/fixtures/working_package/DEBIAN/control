@@ -1,0 +1,16 @@
+Package: rolldice
+Source: rolldice (1.16-1)
+Version: 1.16-1+b2
+Architecture: amd64
+Maintainer: Thomas Ross <thomasross@thomasross.io>
+Installed-Size: 34
+Depends: libc6 (>= 2.7), libreadline7 (>= 6.0)
+Section: games
+Priority: optional
+Homepage: https://github.com/sstrickl/rolldice
+Description: virtual dice roller
+ rolldice is a virtual dice roller that takes a string on the command
+ line in the format  of some fantasy role playing games like Advanced
+ Dungeons & Dragons [1] and returns the result of the dice rolls.
+ .
+ [1] Advanced Dungeons & Dragons is a registered trademark of TSR, Inc.
