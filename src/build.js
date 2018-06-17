@@ -227,13 +227,25 @@ class Debian {
     // http://pubs.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html
     let regex = /\$\{([a-zA-Z_]+[a-zA-Z0-9_]*)\}/g;
     for (let key in input) {
-      input[key] = input[key].replace(regex, (match, result) => {
-        if (result in process.env) {
-          return process.env[result];
-        }
+      if (Array.isArray(input[key])) {
+        for (let i = 0; i < input[key].length; i++) {
+          input[key][i] = input[key][i].replace(regex, (match, result) => {
+            if (result in process.env) {
+              return process.env[result];
+            }
 
-        return "";
-      });
+            return "";
+          });
+        }
+      } else {
+        input[key] = input[key].replace(regex, (match, result) => {
+          if (result in process.env) {
+            return process.env[result];
+          }
+
+          return "";
+        });
+      }
     }
 
     return input;
@@ -243,7 +255,23 @@ class Debian {
     return fs
       .readFile(file, { encoding: "utf8" })
       .then(data => {
-        let dataDict = {};
+        /*
+          dataDict format
+          {
+            key: value,
+            Description: [
+              "whitespace trimmed description to be left-padded later"
+            ]
+          }
+        */
+        let dataDict = {
+          Package: "",
+          Version: "",
+          Architecture: "",
+          Maintainer: "",
+          Description: []
+        };
+
         /*
           We use this less than ideal regex here to deal with long
           descriptions that are present in some Debian packages.
@@ -254,25 +282,25 @@ class Debian {
         var result;
         var reg = /^(([^\s]*):)?(.+)/gm;
         while ((result = reg.exec(data))) {
-          // console.log(result);
           /*
             result[1] = Description:
             result[2] = Description
             result[3] = virtual dice roller
           */
 
-          // then we know that it is a long description
-          if (!result[2] && result[3] && "Description" in dataDict) {
-            dataDict["Description"] += result[3];
-          } else if (result[3]) {
-            dataDict[result[2]] = result[3].trim();
+          if (result[3]) {
+            if (!result[2] || result[2] == "Description") {
+              dataDict["Description"].push(result[3].trim());
+            } else {
+              dataDict[result[2]] = result[3].trim();
+            }
           }
         }
         return dataDict;
       })
       .then(data => {
         requiredFields.forEach(item => {
-          if (!(item in data)) {
+          if (!(item in data) || item == "" || item == []) {
             let err = new Error(
               `The field ${item} is missing from the control file.`
             );
@@ -290,6 +318,12 @@ class Debian {
     const stream = fs.createWriteStream(file);
 
     for (let key in data) {
+      var joined;
+      if (Array.isArray(data[key])) {
+        joined = data[key].join("\n ");
+        await stream.write(`${key}: ${joined}\n`);
+        continue;
+      }
       await stream.write(`${key}: ${data[key]}\n`);
     }
 
