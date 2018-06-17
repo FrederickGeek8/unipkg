@@ -300,7 +300,7 @@ class Debian {
       })
       .then(data => {
         requiredFields.forEach(item => {
-          if (!(item in data) || item == "" || item == []) {
+          if (!(item in data) || data[item] == "" || data[item] == []) {
             let err = new Error(
               `The field ${item} is missing from the control file.`
             );
