@@ -143,7 +143,11 @@ class Debian {
           .on("end", () => {
             Promise.all(md5Promise).then(_ => {
               md5Stream.end();
-              control["Installed-Size"] = Math.floor(pkgSize / 1024).toString();
+              if (!("Installed-Size" in control)) {
+                control["Installed-Size"] = Math.floor(
+                  pkgSize / 1024
+                ).toString();
+              }
               Debian.writeControl(tmpCtrl, control).then(() => rel());
             });
           });
@@ -247,15 +251,20 @@ class Debian {
           https://www.debian.org/doc/manuals/maint-guide/dreq.en.html#control
         */
 
-        let result;
-        let reg = /^(([^\s]*):)?(.*)/gm;
+        var result;
+        var reg = /^(([^\s]*):)?(.+)/gm;
         while ((result = reg.exec(data))) {
+          // console.log(result);
           /*
             result[1] = Description:
             result[2] = Description
             result[3] = virtual dice roller
           */
-          if (result[3]) {
+
+          // then we know that it is a long description
+          if (!result[2] && result[3] && "Description" in dataDict) {
+            dataDict["Description"] += result[3];
+          } else if (result[3]) {
             dataDict[result[2]] = result[3].trim();
           }
         }
