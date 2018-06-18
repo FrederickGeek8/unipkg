@@ -108,7 +108,7 @@ aproba@^1.0.3:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
 
-ar@^0.0.1:
+ar@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/ar/-/ar-0.0.1.tgz#ba80716fe5a450140c6fdb8f6a82b29ad946161c"
 
@@ -588,6 +588,10 @@ combined-stream@1.0.6, combined-stream@~1.0.5:
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
   dependencies:
     delayed-stream "~1.0.0"
+
+commander@^2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
 
 compare-versions@^3.1.0:
   version "3.3.0"

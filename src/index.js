@@ -1,5 +1,5 @@
 const buildTools = require("./build");
-// const scanTools = require("./scan");
+const scanTools = require("./scan");
 
 var funcs = {};
 function extract(obj) {
@@ -17,6 +17,6 @@ function extract(obj) {
 }
 
 extract(buildTools);
-// extract(scanTools);
+extract(scanTools);
 
 module.exports = funcs;

@@ -1,6 +1,6 @@
 {
   "name": "unipkg",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Multi-platform implementation of dpkg",
   "main": "src/index.js",
   "repository": "FrederickGeek8/unipkg",
@@ -32,6 +32,8 @@
     "promises"
   ],
   "dependencies": {
+    "ar": "0.0.1",
+    "commander": "^2.15.1",
     "fs-extra": "^6.0.1",
     "klaw": "^2.1.1",
     "tar": "^4.4.4",
