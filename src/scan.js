@@ -9,11 +9,15 @@ const path = require("path");
 class Scan {
   // Generate Packages file
   static async scan(dir) {
-    const tmpDir = tmp.dirSync().name;
     const files = fs.readdirSync(dir).filter(file => file.match(/.*\.deb/));
+    return Scan.scanFiles(files.map(e => `${dir}/${e}`));
+  }
+
+  static async scanFiles(files) {
+    const tmpDir = tmp.dirSync().name;
     var packages = "";
     for (let i = 0; i < files.length; i++) {
-      let archive = new ar.Archive(fs.readFileSync(`${dir}/${files[i]}`));
+      let archive = new ar.Archive(fs.readFileSync(files[i]));
       let control = archive
         .getFiles()
         .filter(f => f.name() == "control.tar.gz")[0];
@@ -43,14 +47,14 @@ class Scan {
       var sha1 = crypto.createHash("sha1");
       var sha256 = crypto.createHash("sha256");
 
-      await fs.readFile(`${dir}/${files[i]}`).then(data => {
+      await fs.readFile(files[i]).then(data => {
         md5 = md5.update(data).digest("hex");
         sha1 = sha1.update(data).digest("hex");
         sha256 = sha256.update(data).digest("hex");
       });
 
-      const stats = fs.statSync(`${dir}/${files[i]}`);
-      const relPath = path.relative(process.cwd(), path.resolve(dir, files[i]));
+      const stats = fs.statSync(files[i]);
+      const relPath = path.relative(process.cwd(), files[i]);
 
       packages += `Filename: ${relPath}\n`;
       packages += `Size: ${stats.size}\n`;
