@@ -29,7 +29,11 @@
     "dpkg",
     "deb",
     "multiplatform",
-    "promises"
+    "debian",
+    "apt",
+    "package",
+    "repository",
+    "repo"
   ],
   "dependencies": {
     "ar": "0.0.1",
