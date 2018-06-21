@@ -1,6 +1,8 @@
 # unipkg
 [![Gitter chat](https://badges.gitter.im/unipkg/gitter.svg)](https://gitter.im/unipkg/Lobby)
 [![Build Status](https://travis-ci.com/FrederickGeek8/unipkg.svg?token=hQpyUwvb4S1UztNVqWsQ&branch=master)](https://travis-ci.com/FrederickGeek8/unipkg)
+[![npm](https://img.shields.io/npm/v/unipkg.svg)](https://www.npmjs.com/package/unipkg)
+
 
 Multi-platform implementation of dpkg (in Javascript) with a programming and
 command-line interface. Currently only the functional equivalence of `dpkg-deb -b`
@@ -28,32 +30,56 @@ npm install unipkg
 
 ## Usage
 `unipkg` has both a interface for Node.js as well as a command-line interface.
-The command line interface can be used as follows:
+The command line usage is as follows:
 ```bash
-unipkg <directory> [<deb>]
-```
-Where `<directory>` is the path to the root of the Debian package you want to
-build, and `[<deb>]` is the optional output file path parameter. By default
-`unipkg` will generate the output deb file in your current working directory
-using the standard Debian naming scheme.
+Usage: unipkg [options] [command]
 
-The following is boilerplate code for the Node.js interface. `build` can take two
-parameters, where the first parameter is the input directory, and the second
-(optional) parameter is the output deb path. It will return a Promise.
+Options:
+
+  -V, --version                output the version number
+  -h, --help                   output usage information
+
+Commands:
+
+  scan|s <directory>
+      Implementation of the dpkg-scanpackages -m command.
+  <directory> is the directory to be scanned for Debian packages (.deb files).
+  these will be added to a Packages index file which will be output in the current
+  directory.
+
+  build|b <directory> [<out>]
+      Implementation of the dpkg-deb -b command.
+  <directory> is the well structured package folder which should
+  contain both the DEBIAN folder and the data of the package.
+  [<deb>] is the optional output filename and path of the resulting Debian
+  format archive. It defaults to outputting a deb file in the current working
+  directory using the standard Debian name scheme.
+```
+
+The following is boilerplate code for the Node.js interface. The Node.js interface
+has the same usage and parameters as the CLI. Each function will return a Promise.
 ```node
 const dpkg = require("unipkg");
-const pkg = "path/to/project/root";
+const pkg = "path/to/repo/deb/root";
+const repo = "path/to/repo"
 
 dpkg.build(pkg).then(
   path => {
     console.log(`The Debian package ${path} has been successfully written.`);
-    process.exit(0);
   },
   err => {
     console.error(`Error: ${err}`);
-    process.exit(1);
   }
 );
+
+dpkg.scan(repo).then(
+  path => {
+    console.log(`Your repository has been successfully created.`);
+  },
+  err => {
+    console.error(`Error: ${err}`);
+  }
+)
 ```
 
 ## Contributing
