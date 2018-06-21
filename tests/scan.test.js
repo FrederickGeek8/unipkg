@@ -9,24 +9,26 @@ test("generates standard Packages file", async () => {
     .then(() => {
       const file = fs.readFileSync("Packages").toString();
       const approx = `Package: rolldice
-    Source: rolldice (1.16-1)
-    Version: 1.16-1+b2
-    Architecture: amd64
-    Maintainer: Thomas Ross <thomasross@thomasross.io>
-    Installed-Size: 34
-    Depends: libc6 (>= 2.7), libreadline7 (>= 6.0)
-    Section: games
-    Priority: optional
-    Homepage: https://github.com/sstrickl/rolldice
-    Description: virtual dice roller
-     rolldice is a virtual dice roller that takes a string on the command
-     line in the format  of some fantasy role playing games like Advanced
-     Dungeons & Dragons [1] and returns the result of the dice rolls.
-     .
-     [1] Advanced Dungeons & Dragons is a registered trademark of TSR, Inc.
-    MD5sum: 5fa919894c5be25e744731b245036152
-    SHA1: 30f71d3b911c8739cacea94862d7c4123e071ba4
-    SHA256: 0127e1142add31a84422fab6ad668f795c31512c0d132e46fad6640edfdaf184`.replace(
+      Version: 1.16-1+b2
+      Architecture: amd64
+      Maintainer: Thomas Ross <thomasross@thomasross.io>
+      Description: virtual dice roller
+       rolldice is a virtual dice roller that takes a string on the command
+       line in the format  of some fantasy role playing games like Advanced
+       Dungeons & Dragons [1] and returns the result of the dice rolls.
+       .
+       [1] Advanced Dungeons & Dragons is a registered trademark of TSR, Inc.
+      Source: rolldice (1.16-1)
+      Installed-Size: 34
+      Depends: libc6 (>= 2.7), libreadline7 (>= 6.0)
+      Section: games
+      Priority: optional
+      Homepage: https://github.com/sstrickl/rolldice
+      Filename: fake_package/rolldice_1.16-1+b2_amd64.deb
+      Size: 13018
+      MD5sum: 248377a63b7b9283483216dd0fd092d5
+      SHA1: 192269040e5b98ae4dd1cc91f7780db8d1c9b105
+      SHA256: f21d95c10a6348a6b46c69f7290ecf064b14999c86572e3bbc700d517df05116`.replace(
         /\s/g,
         ""
       );

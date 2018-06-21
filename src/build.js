@@ -318,13 +318,12 @@ class Debian {
     const stream = fs.createWriteStream(file);
 
     for (let key in data) {
-      var joined;
       if (Array.isArray(data[key])) {
-        joined = data[key].join("\n ");
+        let joined = data[key].join("\n ");
         await stream.write(`${key}: ${joined}\n`);
-        continue;
+      } else {
+        await stream.write(`${key}: ${data[key]}\n`);
       }
-      await stream.write(`${key}: ${data[key]}\n`);
     }
 
     stream.end();
