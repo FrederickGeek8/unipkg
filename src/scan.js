@@ -13,6 +13,7 @@ class Scan {
     return Scan.scanFiles(files.map(e => `${dir}/${e}`));
   }
 
+  // Generate Packages from Array
   static async scanFiles(files) {
     const tmpDir = tmp.dirSync().name;
     var packages = "";
