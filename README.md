@@ -5,8 +5,7 @@
 
 
 Multi-platform implementation of dpkg (in Javascript) with a programming and
-command-line interface. Currently only the functional equivalence of `dpkg-deb -b`
-has been developed.
+command-line interface.
 
 ## Requirements
 All that is assumed that you are running a Node.js version that
