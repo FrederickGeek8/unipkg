@@ -55,7 +55,7 @@ class Scan {
       });
 
       const stats = fs.statSync(files[i]);
-      const relPath = path.relative(process.cwd(), files[i]);
+      const relPath = path.relative(cwd, files[i]);
 
       packages += `Filename: ${relPath}\n`;
       packages += `Size: ${stats.size}\n`;
@@ -65,7 +65,7 @@ class Scan {
       packages += "\n";
     }
 
-    return fs.writeFile("Packages", packages);
+    return fs.writeFile(`${cwd}/Packages`, packages);
   }
 }
 
