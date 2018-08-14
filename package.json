@@ -1,6 +1,6 @@
 {
   "name": "unipkg",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Multi-platform implementation of dpkg",
   "main": "src/index.js",
   "repository": "FrederickGeek8/unipkg",
