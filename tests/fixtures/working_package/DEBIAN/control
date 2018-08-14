@@ -3,7 +3,6 @@ Source: rolldice (1.16-1)
 Version: 1.16-1+b2
 Architecture: amd64
 Maintainer: Thomas Ross <thomasross@thomasross.io>
-Installed-Size: 34
 Depends: libc6 (>= 2.7), libreadline7 (>= 6.0)
 Section: games
 Priority: optional
