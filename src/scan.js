@@ -8,13 +8,13 @@ const path = require("path");
 
 class Scan {
   // Generate Packages file
-  static async scan(dir, cwd = "./") {
+  static async scan(dir, cwd = "") {
     const files = fs.readdirSync(dir).filter(file => file.match(/.*\.deb/));
     return Scan.scanFiles(files.map(e => `${dir}/${e}`), cwd);
   }
 
   // Generate Packages from Array
-  static async scanFiles(files, cwd = "./") {
+  static async scanFiles(files, cwd = "") {
     const tmpDir = tmp.dirSync().name;
     var packages = "";
     for (let i = 0; i < files.length; i++) {
@@ -65,7 +65,7 @@ class Scan {
       packages += "\n";
     }
 
-    return fs.writeFile(`${cwd}/Packages`, packages);
+    return fs.writeFile(path.join(cwd, "Packages"), packages);
   }
 }
 

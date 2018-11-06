@@ -1,6 +1,6 @@
 {
   "name": "unipkg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Multi-platform implementation of dpkg",
   "main": "src/index.js",
   "repository": "FrederickGeek8/unipkg",
@@ -37,18 +37,18 @@
   ],
   "dependencies": {
     "ar": "0.0.1",
-    "commander": "^2.15.1",
+    "commander": "^2.19.0",
     "fs-extra": "^6.0.1",
     "klaw": "^2.1.1",
-    "tar": "^4.4.4",
+    "tar": "^4.4.7",
     "tmp": "^0.0.33"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-jest": "^21.17.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "jest": "^23.0.1",
-    "prettier": "^1.13.0"
+    "eslint-config-prettier": "^2.10.0",
+    "eslint-plugin-jest": "^21.27.1",
+    "eslint-plugin-prettier": "^2.7.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.14.3"
   }
 }
