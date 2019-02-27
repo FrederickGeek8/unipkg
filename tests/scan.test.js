@@ -5,7 +5,7 @@ process.chdir(`${__dirname}/fixtures/`);
 test("generates standard Packages file", async () => {
   expect.assertions(1);
   return dpkg
-    .scan(`${__dirname}/fixtures/fake_package`)
+    .scan(`fake_package`)
     .then(() => {
       const file = fs.readFileSync("Packages").toString();
       const approx = `Package: rolldice
