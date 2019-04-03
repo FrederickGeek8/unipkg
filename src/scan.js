@@ -8,15 +8,19 @@ const path = require("path");
 
 class Scan {
   // Generate Packages file
-  static async scan(dir, cwd = "") {
+  static async scan(dir, opts = {}) {
     const files = fs.readdirSync(dir).filter(file => file.match(/.*\.deb/));
-    return Scan.scanFiles(files.map(e => `${dir}/${e}`), cwd);
+    return Scan.scanFiles(files.map(e => `${dir}/${e}`), opts);
   }
 
   // Generate Packages from Array
-  static async scanFiles(files, cwd = "") {
+  static async scanFiles(files, opts = {}) {
+    
     const tmpDir = tmp.dirSync().name;
     var packages = "";
+
+    opts.cwd = (opts.cwd ? opts.cwd : "");
+
     for (let i = 0; i < files.length; i++) {
       let archive = new ar.Archive(fs.readFileSync(files[i]));
       let control = archive
@@ -36,6 +40,15 @@ class Scan {
           .on("entry", entry => {
             if (entry.header.path == "./control") {
               packages += entry.buffer.tail.value.toString();
+              control = {}; //recycle variable
+              // parse control
+              var controlData = entry.buffer.tail.value.toString().split('\n');
+              for (var index in controlData) {
+                var data = controlData[index].split(':');
+                if (data.length == 2) {
+                  control[data[0]] = data[1].trim();
+                }
+              }
             }
           })
           .on("end", _ => {
@@ -55,9 +68,15 @@ class Scan {
       });
 
       const stats = fs.statSync(files[i]);
-      const relPath = path.relative(cwd, files[i]);
+      const relPath = path.relative(opts.cwd, files[i]);
 
-      packages += `Filename: ${relPath}\n`;
+      if (typeof opts.filename == 'function') {
+        opts.filename = await opts.filename(control);
+      } else {
+        opts.filename = relPath;
+      }
+
+      packages += `Filename: ${opts.filename}\n`;
       packages += `Size: ${stats.size}\n`;
       packages += `MD5sum: ${md5}\n`;
       packages += `SHA1: ${sha1}\n`;
@@ -65,7 +84,7 @@ class Scan {
       packages += "\n";
     }
 
-    return fs.writeFile(path.join(cwd, "Packages"), packages);
+    return fs.writeFile(path.join(opts.cwd, "Packages"), packages);
   }
 }
 
