@@ -15,11 +15,14 @@ class Scan {
 
   // Generate Packages from Array
   static async scanFiles(files, opts = {}) {
-    
     const tmpDir = tmp.dirSync().name;
     var packages = "";
 
-    opts.cwd = (opts.cwd ? opts.cwd : "");
+    if (typeof opts == "string") {
+      opts = { cwd: opts };
+    } else {
+      opts.cwd = opts.cwd ? opts.cwd : "";
+    }
 
     for (let i = 0; i < files.length; i++) {
       let archive = new ar.Archive(fs.readFileSync(files[i]));
@@ -42,9 +45,9 @@ class Scan {
               packages += entry.buffer.tail.value.toString();
               control = {}; //recycle variable
               // parse control
-              var controlData = entry.buffer.tail.value.toString().split('\n');
+              var controlData = entry.buffer.tail.value.toString().split("\n");
               for (var index in controlData) {
-                var data = controlData[index].split(':');
+                var data = controlData[index].split(":");
                 if (data.length == 2) {
                   control[data[0]] = data[1].trim();
                 }
@@ -70,7 +73,7 @@ class Scan {
       const stats = fs.statSync(files[i]);
       const relPath = path.relative(opts.cwd, files[i]);
 
-      if (typeof opts.filename == 'function') {
+      if (typeof opts.filename == "function") {
         opts.filename = await opts.filename(control);
       } else {
         opts.filename = relPath;
