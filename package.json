@@ -26,7 +26,7 @@
     "unipkg": "bin/unipkg.js"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=18.0.0"
   },
   "keywords": [
     "dpkg",

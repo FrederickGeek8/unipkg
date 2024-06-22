@@ -6,8 +6,7 @@ Multi-platform implementation of dpkg (in Javascript) with a programming and
 command-line interface.
 
 ## Requirements
-All that is assumed that you are running a Node.js version that
-[has not been marked as end-of-life.](https://github.com/nodejs/Release#release-schedule)
+This project has been tested (via our Jest tests) on Node v18.20.3 and v20.15.0.
 
 The project depends on `fs-extra`, `klaw`, `tmp`, `tar`, all of which should be
 installed by NPM or Yarn when installing the package. This should *in theory* run
