@@ -3,7 +3,10 @@
   "version": "0.2.1",
   "description": "Multi-platform implementation of dpkg",
   "main": "src/index.js",
-  "repository": "FrederickGeek8/unipkg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrederickGeek8/unipkg.git"
+  },
   "author": "Frederick Morlock",
   "license": "LGPL-3.0-only",
   "scripts": {
@@ -20,7 +23,7 @@
     "testEnvironment": "node"
   },
   "bin": {
-    "unipkg": "./bin/unipkg.js"
+    "unipkg": "bin/unipkg.js"
   },
   "engines": {
     "node": ">=4.0.0"
