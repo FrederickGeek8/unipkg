@@ -1,6 +1,4 @@
 # unipkg
-[![Gitter chat](https://badges.gitter.im/unipkg/gitter.svg)](https://gitter.im/unipkg/Lobby)
-[![Build Status](https://travis-ci.com/FrederickGeek8/unipkg.svg?token=hQpyUwvb4S1UztNVqWsQ&branch=master)](https://travis-ci.com/FrederickGeek8/unipkg)
 [![npm](https://img.shields.io/npm/v/unipkg.svg)](https://www.npmjs.com/package/unipkg)
 
 
