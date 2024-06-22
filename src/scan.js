@@ -42,12 +42,12 @@ class Scan {
           )
           .on("entry", entry => {
             if (entry.header.path == "./control") {
-              packages += entry.buffer.tail.value.toString();
+              const controlData = entry.read().toString();
+              packages += controlData;
               control = {}; //recycle variable
               // parse control
-              var controlData = entry.buffer.tail.value.toString().split("\n");
-              for (var index in controlData) {
-                var data = controlData[index].split(":");
+              for (let dataLine of controlData.split("\n")) {
+                const data = dataLine.split(":");
                 if (data.length == 2) {
                   control[data[0]] = data[1].trim();
                 }
